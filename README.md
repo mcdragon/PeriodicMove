@@ -34,4 +34,4 @@ After that, type the following command in the termination.
 python main.py
 ```
 
-When the training procedure is completed, the termination will print the results stated in our paper.
+When the training procedure is completed, the terminal will print the results stated in our paper.
