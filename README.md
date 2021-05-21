@@ -9,14 +9,12 @@ This is the source code for submission-352 of CIKM 2021: PeriodicMove: Shift-awa
 - easydict==1.9
 - matplotlib==3.1.1
 
-
-
 ## Running
 
 For the simplification, we only supply the foursquare dataset used in the paper. 
 
-```python
-v3_delta_0.005_window_size_6_mask_num_10.tar.gz
+```
+Foursquare_mask_num_10.tar.gz
 ```
 
 Firstly, the user should extract the file, e.g., pos.vocab.txt. Then they need to change the setting in the config.
