@@ -22,9 +22,9 @@ v3_delta_0.005_window_size_6_mask_num_10.tar.gz
 Firstly, the user should extract the file, e.g., pos.vocab.txt. Then they need to change the setting in the config.
 
 ```python
-vocab_path 						# the path of vocab file
+vocab_path 						  # the path of vocab file
 dist_path							# the path of distance file
-train_file 						# the path of traning data
+train_file 						  # the path of traning data
 eval_path							# the path of validation data
 test_path							# the path of testing data
 save_dir							# the path for saving model and embedding matrix
