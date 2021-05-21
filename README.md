@@ -1,5 +1,5 @@
 # submission-352
-This is the source code for submission-654 of CIKM 2021: PeriodicMove: Shift-aware Human Mobility Recovery with Graph Neural Network
+This is the source code for submission-352 of CIKM 2021: PeriodicMove: Shift-aware Human Mobility Recovery with Graph Neural Network
 
 ## Dependencies
 
@@ -22,7 +22,7 @@ v3_delta_0.005_window_size_6_mask_num_10.tar.gz
 Firstly, the user should extract the file, e.g., pos.vocab.txt. Then they need to change the setting in the config.
 
 ```python
-vocab_path      #the path of vocab file
+vocab_path      # the path of vocab file
 dist_path       # the path of distance file
 train_file      # the path of traning data
 eval_path       # the path of validation data
