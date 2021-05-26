@@ -45,7 +45,6 @@ def train(model, optimizer, criterion, train_dataloader, config, verbose=True, v
                 loss = criterion(scores, targets-3)
             loss.backward()
             optimizer.step()
-            # todo: grad_norm
             training_epoch_loss += loss.item()
         alpha = alpha * alpha_decay
         if verbose == True:
