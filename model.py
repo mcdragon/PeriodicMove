@@ -76,7 +76,6 @@ class SessionGraph(Module):
         super(SessionGraph, self).__init__()
         self.hidden_size = opt.hidden_size
         self.n_node = n_node
-        #self.embedding = nn.Embedding(self.n_node, self.hidden_size)
         self.gnn = GNN(self.hidden_size, step=opt.step)
         self.reset_parameters()
 
@@ -125,7 +124,6 @@ class PeriodMigrationCrossMultiHeadAttention(nn.Module):
 
         # residual connection
         seq_hidden_history = self.compress_layer(seq_hidden_history_attn)+seq_hidden_history
-        #seq_hidden_history = self.compress_layer(seq_hidden_history_attn)
 
         return seq_hidden_history
 
@@ -138,14 +136,10 @@ class GNN_GNN_model(nn.Module):
     def __init__(self, parameters, n_node, history_size):
         super(GNN_GNN_model, self).__init__()
         self.hidden_size = parameters.hidden_size
-        # 有两个embedding层  一个在当前 一个在SessionGraph中
         self.embedding = nn.Embedding(n_node, parameters.hidden_size)
         print("Warning: the length of PosEncoder in GNN_GNN_model is fixed at 48.")
         self.pos_encoding_layer = PosEncoder(48, parameters.hidden_size)
-        #self.pos_encoding_layer = PosEmbedding(48, parameters.hidden_size)
         self.GNN = SessionGraph(parameters, n_node)
-        #self.linear_his_one = nn.Linear(parameters.hidden_size, parameters.hidden_size, bias=True)
-        #self.linear_his_two = nn.Linear(parameters.hidden_size, parameters.hidden_size, bias=True)
         self.cross_attn_layer = PeriodMigrationCrossMultiHeadAttention(parameters.hidden_size, parameters.cross_n_heads)
         self.linear_one = nn.Linear(parameters.hidden_size, parameters.hidden_size, bias=True)
         self.linear_two = nn.Linear(parameters.hidden_size, parameters.hidden_size, bias=True)
@@ -172,7 +166,6 @@ class GNN_GNN_model(nn.Module):
         # Historical trajectory GNN
         historical_sessions = self.embedding(historical_inputs)
         historical_sessions = self.GNN(historical_sessions, historical_input_A)
-        #historical_sessions = self.embedding(historical_inputs)
         get_history = lambda i: historical_sessions[i][historical_alias_inputs[i]]
         # batch_size * history_length, seq_length, hidden_size
         seq_hidden_history = torch.stack([get_history(i) for i in torch.arange(len(historical_alias_inputs)).long()])
@@ -184,7 +177,6 @@ class GNN_GNN_model(nn.Module):
         # Current trajectory GNN
         current_sessions = self.embedding(current_inputs)
         current_sessions = self.GNN(current_sessions, current_input_A)
-        #current_sessions = self.embedding(current_inputs)
         get_current = lambda i: current_sessions[i][current_alias_inputs[i]]
         # batch_size, seq_length, hidden_size
         seq_hidden_current = torch.stack([get_current(i) for i in torch.arange(len(current_alias_inputs)).long()])
@@ -205,7 +197,6 @@ class GNN_GNN_model(nn.Module):
         # batch_size, seq_length, hidden_size
         historical_information = torch.sum(alpha * seq_hidden_history.float(), 1)
         # batch_size, seq_length, hidden_size
-        #historical_information = seq_hidden_history.mean(1)
 
         # concat historical and current information
         # batch_size, seq_length, hidden_size
