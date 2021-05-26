@@ -93,8 +93,6 @@ def split_traj_index(data_dict, w2i_dict):
 def preprocess(filepath, w2i_dict):
     data_dict = load_trajfile(filepath)
     data_dict = convert_traj_to_index(w2i_dict, data_dict)
-    #data_dict = split_traj_index_mask_by_last(data_dict)
     data_dict = split_traj_index(data_dict, w2i_dict)
-    # if mask == True:
-    #     data_dict = random_mask(data_dict, mask_num=mask_num)
+
     return data_dict
