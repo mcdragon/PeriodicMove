@@ -1,5 +1,5 @@
 # PeriodicMove: Shift-aware Human Mobility Recovery with Graph Neural Network
-This is the source code for submission-352 of CIKM 2021: PeriodicMove: Shift-aware Human Mobility Recovery with Graph Neural Network
+This is the source code for “PeriodicMove: Shift-aware Human Mobility Recovery with Graph Neural Network” accepted by CIKM 2021: 
 
 ## Dependencies
 
